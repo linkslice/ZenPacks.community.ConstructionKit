@@ -13,7 +13,7 @@ unused(Globals)
 
 class ConstructMigration(ZenPackMigration):
 
-    version = '2.0.0'
+    version = Version(2, 0, 0)
 
     def migrate(self, dmd):
         log.info("Running ConstructMigration")
