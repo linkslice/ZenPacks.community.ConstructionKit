@@ -7,24 +7,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04  # Use an older Ubuntu version that still supports Python 2.7
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python 2.7
-        uses: actions/setup-python@v4
-        with:
-          python-version: 2.7
-
-      - name: Install dependencies
+      - name: Install Python 2.7
         run: |
-          pip install setuptools
+          sudo apt update
+          sudo apt install -y python2 python2-dev python-pip
+          python2 -m pip install --upgrade pip setuptools wheel
 
       - name: Build Egg
         run: |
-          python setup.py bdist_egg
+          python2 setup.py bdist_egg
 
       - name: Upload Egg as Release Asset
         uses: softprops/action-gh-release@v1
